@@ -3,11 +3,12 @@ import axios from "axios";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const Basketshop = ({ cart , setCart , removeCookie}) => {
+const Basketshop = ({ cart , setCart , removeCookie }) => {
   const navigate = useNavigate();
   const [price , setPrice] = useState(0);
   const [amount , setamount] = useState();
-  console.log(cart);
+  const [newcart , setnewcart] = useState();
+  console.log(cart[0]);
 
   const handleRemove = (id) => {
     const arr = cart.map((item) => (Object.values(item).filter((item) => item.id !== id)));
@@ -27,6 +28,7 @@ const Basketshop = ({ cart , setCart , removeCookie}) => {
   useEffect(() => {
     handlePrice();
   });
+
 
   const handleChange = async (item, d) => {
     setamount(item.amount + d);
@@ -54,7 +56,7 @@ const Basketshop = ({ cart , setCart , removeCookie}) => {
     <Box sx={{ pt:25 , backgroundColor: '#E0FFFF'}}>
       <Box sx={{pl:3}}>
       <article>
-    {cart.map((commodity) => (
+    {cart?.map((commodity) => (
       Object.values(commodity).map((item) => (
         <div key={item.id}>
           <div>
@@ -69,17 +71,17 @@ const Basketshop = ({ cart , setCart , removeCookie}) => {
           <div>
             <span>{item.price}تومان</span>
             <br/>
-            <button onClick={() => handleRemove(item.id)}>Remove</button>
+            <button onClick={() => handleRemove(item.id)}>حذف از سبد خرید</button>
           </div>
         </div>
     ))
     ))}
       <Box sx={{pt:10}}>
-        <span>Total Price of your Cart</span>
-        <span>Rs - {price}</span>
+        <span>قیمت تمام شده برای شما</span>
+        <span>Toman - {price}</span>
       </Box>
       <Button 
-        sx={{ mt:10 , backgroundColor: '#90EE90' ,  mb:2 }}
+        sx={{ mt:10 , backgroundColor: '#90EE90' ,  mb:2 , color:"black"}}
         onClick={() => {
           navigate('/form' , {state:{ id:price , name:cart }})
         }}

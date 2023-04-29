@@ -7,7 +7,6 @@ import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import Toolbar from '@mui/material/Toolbar';
-import Books from '../../user/Books';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { Button, Card, Grid } from '@mui/material';
@@ -52,6 +51,7 @@ export default function Category(props) {
   const index = props.index;
   console.log(index);
   const [data , setdata] = useState(null);
+  const [databook , setdatabook] = useState(null);
   const [value , setValue] = useState(0);
   const navigate = useNavigate();
   const [showCard , setshowCard] = useState(true);
@@ -73,6 +73,17 @@ export default function Category(props) {
   },[]);
   console.log(data);
 
+  useEffect(() => {
+    axios.get(`http://localhost:3002/products?commodity=books&categoryindex=${index}`)
+    .then((res) => {
+        setdatabook(res.data)
+    })
+    .catch((err) => {
+        alert(err.response.statusText);
+    });
+  },[]);
+  console.log(databook);
+
   const handleChange2 = (event, newValue) => {
     setValue(newValue);
   };
@@ -81,7 +92,7 @@ export default function Category(props) {
   return (
     <div>
       {(showCard) ? (
-        <Box sx={{ pt:{xs:3 , md:7} , pl:{xs:3 , md:2}}}>
+        <Box sx={{ pt:{xs:3 , md:7} }}>
         <Box sx={{ direction: 'rtl' }}>
           <Tabs value={value} onChange={handleChange2} textColor="inherit" indicatorColor="white" sx={{ pt:20 , display: { xs: 'none', md: 'flex' }}}>
             <Tab sx={{mr:5 , backgroundColor: '#90EE90' , borderRadius: 10 , px: 35}} label="قطعات و ابزارها" {...a11yProps(0)}/>
@@ -104,7 +115,7 @@ export default function Category(props) {
                   <Card sx={{ mr:2 , mb:1.5 , backgroundColor: '#90EE90' }} 
                     onClick={(e) => {
                       e.preventDefault();
-                      navigate( '/card' , {state:{ id:record.id }} )
+                      navigate( '/card' , {state:{ id:record.id , name:false }} )
                     }}
                   >
                     <ImageListItem>
@@ -125,9 +136,9 @@ export default function Category(props) {
                     onClick={() => {
                       handleClick(record)
                     }}
-                    sx={{ mr:2 , mb:1.5 , backgroundColor: '#90EE90' }}
+                    sx={{ mr:2 , mb:1.5 , backgroundColor: '#90EE90' , color:"black" }}
                   >
-                  اضافه به سبد خرید
+                  افزودن به سبد خرید
                   </Button>
                 </Grid>
                 )
@@ -136,7 +147,44 @@ export default function Category(props) {
             </Box>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Books/>
+            <Box sx={{ display: 'flex', pt: 0, borderRadius: 1 }}>
+              <Grid sx={{ width:{ xs:300 , md:1200 } , mt:0 , ml:3.5 }} container spacing={4}> 
+                {databook?.map((record) => {
+                  return(
+                    <Grid item xs={12} md={3}>
+                      <Card sx={{ mr:2 , mb:1.5 , backgroundColor: '#90EE90' }} 
+                        onClick={(e) => {
+                        e.preventDefault();
+                        navigate( '/card' , {state:{ id:record.id , name:false }} )
+                        }}
+                      >
+                        <ImageListItem>
+                          <img
+                            src={`http://localhost:3002/files/${record.image}`}
+                            alt={record.title}
+                            loading="lazy"
+                          />
+                          <ImageListItemBar
+                            title={record.title}
+                            subtitle={`${record.price}$`}
+                            position="below"
+                            sx={{ pl:2 }}
+                          />
+                        </ImageListItem>
+                      </Card>
+                      <Button 
+                        onClick={() => {
+                          handleClick(record)
+                        }}
+                        sx={{ mr:2 , mb:1.5 , backgroundColor: '#90EE90' , color:"black" }}
+                      >
+                      افزودن به سبد خرید
+                      </Button>
+                    </Grid>
+                  )
+                })}
+              </Grid>
+            </Box>
           </TabPanel>
         </Toolbar>
       </Box>

@@ -26,7 +26,6 @@ const Headeruser = () => {
   const [data , setdata] = useState(null);
   const [filteredData , setFilteredData] = useState([]);
   const [wordEntered , setWordEntered] = useState("");
-  const [show, setShow] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -101,12 +100,12 @@ const Headeruser = () => {
           <IconButton
             size="large"
             edge="start"
-            color="inherit" 
+            // color="inherit" 
             aria-label="open drawer"
             sx={{ mr: 2 , color:'white'}}
             onClick={handleOpenNavMenu}
           >
-            <MenuIcon />
+            <MenuIcon/>
           </IconButton>
             <Menu
               id="menu-appbar"
@@ -130,8 +129,7 @@ const Headeruser = () => {
                 <MenuItem 
                   key={page} 
                   onClick={() => {
-                    setShow(true)
-                    navigate(routes[index] , {state:{ name:show }})
+                    navigate(routes[index] , {state:{ name:true }})
                   }}
                   value={routes[index]} 
                   >
@@ -145,8 +143,7 @@ const Headeruser = () => {
               <Button
                 key={page}
                 onClick={() => {
-                  setShow(true)
-                  navigate(routes[index] , {state:{ name:show }})
+                  navigate(routes[index] , {state:{ name:true }})
                 }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
                 value={routes[index]}
@@ -181,48 +178,72 @@ const Headeruser = () => {
               </IconButton>
           </Box>
         </Toolbar>
-        <Box sx={{ width: '100%' }}>
+        <Box>
             <Box sx={{ borderBottom: 0, direction: 'rtl' , display: { xs: 'none', md: 'flex' } }}>
                 <Tabs sx={{ pt:2 }}>
-                    <Button onClick={(e) => {
-                      e.preventDefault();
-                      navigate("/tab",{state:{id:0 , name:filteredData}})
-                    }}>خانه
+                    <Button 
+                      sx={{ color:"white" }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/tab",{state:{id:0 , name:filteredData}})
+                      }}
+                    >خانه
                     </Button>
-                    <Button onClick={(e) => {
-                      e.preventDefault();
-                      navigate("/tab",{state:{id:1 , name:filteredData}})
-                    }}>قطعات و تجهیزات الکترونیکی
+                    <Button 
+                      sx={{ color:"white" }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/tab",{state:{id:1 , name:filteredData}})
+                      }}
+                    >قطعات و تجهیزات الکترونیکی
                     </Button>
-                    <Button onClick={(e) => {
-                      e.preventDefault();
-                      navigate("/tab",{state:{id:2 , name:filteredData}})
-                    }}>ابزارآلات و تجهیزات
+                    <Button 
+                      sx={{ color:"white" }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/tab",{state:{id:2 , name:filteredData}})
+                      }}
+                    >ابزارآلات و تجهیزات
                     </Button>
-                    <Button onClick={(e) => {
-                      e.preventDefault();
-                      navigate("/tab",{state:{id:3 , name:filteredData}})
-                    }}>تجهیزات رباتیک
+                    <Button 
+                      sx={{ color:"white" }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/tab",{state:{id:3 , name:filteredData}})
+                      }}
+                    >تجهیزات رباتیک
                     </Button>
-                    <Button onClick={(e) => {
-                      e.preventDefault();
-                      navigate("/tab",{state:{id:4 , name:filteredData}})
-                    }}>ماژول ها
+                    <Button 
+                      sx={{ color:"white" }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/tab",{state:{id:4 , name:filteredData}})
+                      }}
+                    >ماژول ها
                     </Button>
-                    <Button onClick={(e) => {
-                      e.preventDefault();
-                      navigate("/tab",{state:{id:5 , name:filteredData}})
-                    }}>سنسور ها
+                    <Button 
+                      sx={{ color:"white" }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/tab",{state:{id:5 , name:filteredData}})
+                      }}
+                    >سنسور ها
                     </Button>
-                    <Button onClick={(e) => {
-                      e.preventDefault();
-                      navigate("/tab",{state:{id:6 , name:filteredData}})
-                    }}>مینی کامپیوتر ها
+                    <Button 
+                      sx={{ color:"white" }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/tab",{state:{id:6 , name:filteredData}})
+                      }}
+                    >مینی کامپیوتر ها
                     </Button>
-                    <Button onClick={(e) => {
-                      e.preventDefault();
-                      navigate("/tab",{state:{id:7 , name:filteredData}})
-                    }}>نمایشگر ها
+                    <Button 
+                      sx={{ color:"white" }}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/tab",{state:{id:7 , name:filteredData}})
+                      }}
+                    >نمایشگر ها
                     </Button>
                 </Tabs>
             </Box>

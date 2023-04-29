@@ -23,6 +23,7 @@ class API {
     this.http.interceptors.request.use(
       (config) => {
         // add `access token` if it exists
+        console.log(config);
         return config;
       },
       (error) => {

@@ -1,4 +1,4 @@
-import { useRef , useState , useEffect } from "react";
+import { useRef , useState } from "react";
 import axios from "axios";
 import {
   Box,
@@ -62,8 +62,8 @@ export default function Managementcommodity() {
     return (
       <>
       <Box>
-      <Stack direction="row" sx={{pt:5 , pl:1.5}}>
-        <Button sx={{backgroundColor: '#90EE90'}} onClick={handleOpen}>Add Commodity</Button>
+      <Stack direction="row" sx={{ pl:1.5}}>
+        <Button sx={{backgroundColor: '#90EE90' , color:"black"}} onClick={handleOpen}>اضافه کردن کالا </Button>
       </Stack>  
       <Modal
           open={open}
@@ -93,9 +93,9 @@ export default function Managementcommodity() {
           >
             <TableHead>
               <TableRow>
-                <TableCell>Picture</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>price</TableCell>
+                <TableCell></TableCell>
+                <TableCell>نام</TableCell>
+                <TableCell>قیمت</TableCell>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>
@@ -129,15 +129,17 @@ export default function Managementcommodity() {
                       <TableCell>{record.price}</TableCell>
                       <TableCell>
                           <Button 
+                            sx={{color:"black"}}
                             onClick={() => {
                               setid(record.id)
                               setOpen1(true)
                               }
                             }
                             >
-                            Edit
+                            تصحیح
                           </Button>
                           <Button
+                            sx={{color:"black"}}
                             onClick={(e) => {
                               e.target.parentNode.parentNode.parentNode.deleteRow(index)
                               axios.delete(
@@ -145,7 +147,7 @@ export default function Managementcommodity() {
                               )
                             }}
                           >
-                            Delete
+                            حذف
                           </Button>
                       </TableCell>
                     </TableRow>

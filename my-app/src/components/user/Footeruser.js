@@ -23,7 +23,7 @@ const style = {
 export default function App() {
   return (
     <div>
-      <Box sx={{ width:{ xs:420 , md:1310 } , height:{ xs:340 , md:200 }}} style={style}>
+      <Box sx={{ height:{ xs:340 , md:200 }}} style={style}>
       <Typography sx={{ mt: 0, mb: 2 }} variant="h6" component="div">
         ABOUT US 
       </Typography>

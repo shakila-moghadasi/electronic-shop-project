@@ -8,13 +8,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import { Tab , Tabs , AppBar, Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet , useNavigate } from 'react-router-dom';
 
 const pages = ['کالاها', 'پیگیری سفارش ها'];
-const routes = ["/commodity", "/ordered" , "/"];
 
 const HeaderAdmin = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -26,15 +26,15 @@ const HeaderAdmin = () => {
 
   return (
     <div>
-    <AppBar position="static" sx={{ backgroundColor: '#3CB371' }}>
+    <AppBar position="static" sx={{ backgroundColor: '#3CB371' , mb:3 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
         <Button
             noWrap
-            value={routes[2]}
+            value={"/"}
             label="Ordered"
             component={Link}
-            to={routes[2]}
+            to={"/"}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -76,19 +76,19 @@ const HeaderAdmin = () => {
               {pages.map((page , index) => (
                 <MenuItem 
                   key={page} 
-                  onClick={handleCloseNavMenu}
-                  value={routes[index]}
-                  component={Link}
-                  to={routes[index]}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate( '/Management' , {state:{ id:index+1 }} )
+                  }}
                   >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
               <MenuItem 
                 onClick={handleCloseNavMenu}
-                value={routes[2]}
+                value={"/"}
                 component={Link}
-                to={routes[2]}
+                to={"/"}
                 >
                   <Typography textAlign="center">بازگشت به سایت</Typography>
               </MenuItem>
@@ -96,16 +96,18 @@ const HeaderAdmin = () => {
           </Box>
         <Tabs sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} textColor="white" >
           <Tab
-            value={routes[0]}
             label="کالاها"
-            component={Link}
-            to={routes[0]}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate( '/Management' , {state:{ id:1 }} )
+            }}
           />
           <Tab
-            value={routes[1]}
             label="پیگیری سفارش ها"
-            component={Link}
-            to={routes[1]}
+            onClick={(e) => {
+              e.preventDefault();
+              navigate( '/Management' , {state:{ id:2 }} )
+            }}
           />
         </Tabs>
         

@@ -47,7 +47,7 @@ export default function SearchComponent(props) {
                         }}
                         sx={{ mr:2 , mb:1.5 , backgroundColor: '#90EE90' }}
                       >
-                      اضافه به سبد خرید
+                      افزودن به سبد خرید
                       </Button>
                     </Grid>
                   );

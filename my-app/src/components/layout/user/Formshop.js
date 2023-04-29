@@ -57,7 +57,7 @@ const Formshop = () => {
           <TextField
             id="first-input"
             name="firstName"
-            label="First Name"
+            label="نام"
             type="text"
             value={formValues.name}
             onChange={handleInputChange}
@@ -68,7 +68,7 @@ const Formshop = () => {
           <TextField
             id="last-input"
             name="lastName"
-            label="Last Name"
+            label="نام خانوادگی"
             type="text"
             onChange={handleInputChange}
           />
@@ -78,7 +78,7 @@ const Formshop = () => {
           <TextField
             id="adress-input"
             name="Adress"
-            label="Adress"
+            label="آدرس"
             type="text"
             onChange={handleInputChange}
           />
@@ -88,7 +88,7 @@ const Formshop = () => {
           <TextField
             id="number-input"
             name="number phone"
-            label="number phone"
+            label="شماره تلفن"
             type="text"
             value={formValues.number}
             onChange={(e) => setnumber(e.target.value)}
@@ -98,14 +98,14 @@ const Formshop = () => {
         <Grid item>
           <TextField
             id="Date-input"
-            name="Date Delevery"
+            name="تاریخ ارسال"
             type="date"
             onChange={(e) => setorderDate(e.target.value)}
           />
         </Grid>
         <br/>
-        <Button sx={{backgroundColor: '#90EE90'}} type="submit">
-          payment
+        <Button sx={{backgroundColor: '#90EE90' , color:"black"}} type="submit">
+          پرداخت
         </Button>
       </Grid>
       </Box>

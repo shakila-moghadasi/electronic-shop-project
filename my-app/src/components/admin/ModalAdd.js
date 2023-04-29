@@ -28,7 +28,8 @@ const ModalAdd = () => {
 
   const changehandler = (e) => {
     setimage(Array.from(e.target.files))
-    preview(image[0])
+    const files = Array.from(e.target.files);
+    preview(files[0])
   }
 
   const submitHanler = async (e) => {

@@ -4,7 +4,7 @@ import { List, ListItem, Typography} from '@mui/material';
 import { Box } from '@mui/system';
 
 
-export default function ModalWaitingOrders(props) {
+export default function ModalPostedOrders(props) {
   const [data , setdata] = useState(null);
 
   useEffect(() => {
@@ -14,6 +14,7 @@ export default function ModalWaitingOrders(props) {
     });
   } , [] );
   console.log(data);
+
 
   return (
     <div>

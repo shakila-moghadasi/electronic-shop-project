@@ -16,18 +16,19 @@ import {
 import { useFetch } from "../../admin/UseFetch";
 import Link from '@mui/material/Link';
 import ModalWaitingOrders from "../../admin/ModalWaitingOrders";
+import { api } from "../../admin/Api";
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 650,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
+};
 
 export default function Waitingcommodity() {
     const limit = useRef(4);
@@ -57,7 +58,8 @@ export default function Waitingcommodity() {
         flexDirection: "column",
         alignItems: "center",
         gap: 2,
-        marginInline: 2
+        marginInline: 2,
+        pt:3
       }}
     >
       <TableContainer component={Paper}>
@@ -68,9 +70,10 @@ export default function Waitingcommodity() {
         >
           <TableHead>
             <TableRow>
-              <TableCell>user name</TableCell>
-              <TableCell>Total amount</TableCell>
-              <TableCell>Order registration time</TableCell>
+              <TableCell>نام</TableCell>
+              <TableCell>قیمت تمام شده</TableCell>
+              <TableCell>زمان ارسال سفارش</TableCell>
+              <TableCell></TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -93,7 +96,7 @@ export default function Waitingcommodity() {
               <>
                 {data.data.map((record) => (
                   <TableRow key={record.id}>
-                    <TableCell>{record.customerDetail.firstName}</TableCell>
+                    <TableCell>{`${record.customerDetail.firstName} ${record.customerDetail.lastName}`}</TableCell>
                     <TableCell>{`${record.amount}$`}</TableCell>
                     <TableCell>{record.orderDate}</TableCell>
                     <TableCell>
@@ -104,10 +107,30 @@ export default function Waitingcommodity() {
                           }
                         }
                       >
-                        Check Orders
+                        چک کردن سفارشات
                       </Link>
                     </TableCell>
-                    <TableCell></TableCell>
+                    <TableCell>
+                      <Link
+                        onClick={(e) => {
+                          e.preventDefault()
+                          api.get(`/orders/${record.id}`).then((r) => {
+                            let user = r.data;
+                            api.put(`/orders/${record.id}`, {
+                              customerDetail: user.customerDetail,
+                              amount: user.amount,
+                              orderNumber: user.orderNumber,
+                              orderDate: user.orderDate,
+                              orderStatus: 1,
+                              createdAt: user.createdAt,
+                              orderItems: user.orderItems
+                            });
+                          });
+                        }}
+                      >
+                        اضافه کردن به ارسال شده ها
+                      </Link>
+                    </TableCell>
                   </TableRow>
                 ))}
               </>
